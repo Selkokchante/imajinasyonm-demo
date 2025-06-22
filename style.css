@@ -40,9 +40,13 @@ textarea {
   resize: none;
 }
 
+textarea::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
 /* Bouton Jwe */
 button {
-  margin-top: 15px;
   padding: 12px 25px;
   font-size: 16px;
   background-color: #2e89ff;
@@ -50,11 +54,28 @@ button {
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
   background-color: #1a6dd9;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* Gwoup bouton yo */
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.buttons button {
+  flex: 1 1 120px;
 }
 
 /* Bouton & Kontwòl Vwa */
@@ -62,6 +83,7 @@ label {
   display: block;
   margin-top: 20px;
   font-size: 14px;
+  color: #444;
 }
 
 input[type="range"] {
@@ -77,5 +99,4 @@ input[type="range"] {
 input[type="checkbox"] {
   transform: scale(1.2);
   margin-right: 8px;
-  }
-  
+}
