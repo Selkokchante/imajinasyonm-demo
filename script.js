@@ -1,35 +1,57 @@
-let loop = false;
+let voices = [];
+
+window.speechSynthesis.onvoiceschanged = () => {
+  voices = window.speechSynthesis.getVoices();
+};
 
 function detectLang(text) {
-  if (/[àâçéèêëîïôûùüÿñæœ]/i.test(text)) return "fr-FR";
-  if (/[a-zA-Z]/.test(text) && !text.includes("ò") && !text.includes("è")) return "en-US";
-  if (/[\u00C0-\u017F]|[òèù]/i.test(text)) return "ht-HT"; // Kreyòl approximation
-  return "en-US";
-}
-
-function speakText(text, lang = "auto", rate = 1) {
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = lang === "auto" ? detectLang(text) : lang;
-  utterance.rate = rate;
-  speechSynthesis.cancel(); // anile avan li nouvo
-  speechSynthesis.speak(utterance);
-
-  if (loop) {
-    utterance.onend = () => {
-      setTimeout(() => {
-        speakText(text, lang, rate);
-      }, 1000);
-    };
-  }
+  if (text.match(/[àâçéèêëîïôûùüÿœ]/i)) return "fr-FR"; // Franse
+  if (text.match(/\b(ou|mwen|li|nou|yo|pa|ki|sa)\b/i)) return "ht-HT"; // Kreyòl
+  if (text.match(/\b(the|you|and|is|this|that)\b/i)) return "en-US"; // Anglè
+  return "en-US"; // Default
 }
 
 function playText() {
   const text = document.getElementById("textInput").value;
-  const rate = parseFloat(document.getElementById("rate").value);
-  speakText(text, "auto", rate);
+  const speed = parseFloat(document.getElementById("speedControl").value);
+  const repeat = document.getElementById("repeatToggle").checked;
+
+  if (!text.trim()) return;
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  const lang = detectLang(text);
+  utterance.lang = lang;
+
+  const matchedVoice = voices.find(v => v.lang === lang);
+  if (matchedVoice) {
+    utterance.voice = matchedVoice;
+  }
+
+  utterance.rate = speed;
+
+  utterance.onend = function () {
+    if (repeat) {
+      speechSynthesis.speak(utterance);
+    }
+  };
+
+  speechSynthesis.cancel();
+  speechSynthesis.speak(utterance);
 }
 
-function toggleLoop() {
-  loop = !loop;
-  alert(loop ? "✅ Repete aktive" : "⛔ Repete dezaktive");
-    }
+document.addEventListener("DOMContentLoaded", () => {
+  // Ajoute kontwòl vitès
+  const controlsDiv = document.createElement("div");
+  controlsDiv.innerHTML = `
+    <label for="speedControl">Vitès: <span id="speedValue">1x</span></label><br/>
+    <input type="range" id="speedControl" min="0.5" max="2" value="1" step="0.1"/>
+    <br/>
+    <label><input type="checkbox" id="repeatToggle" /> Repete Emisyon an</label>
+  `;
+  document.querySelector(".container").appendChild(controlsDiv);
+
+  document.getElementById("speedControl").addEventListener("input", function () {
+    document.getElementById("speedValue").innerText = this.value + "x";
+  });
+});
+  
