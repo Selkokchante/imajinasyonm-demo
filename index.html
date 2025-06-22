@@ -1,19 +1,43 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Imajinasyonm - Emisyon</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
 <body>
-  <div class="container">
-    <h1>Imajinasyonm 📻</h1>
+  <div class="container">
+    <h1>Imajinasyonm 📻</h1>
 
-    <textarea id="textInput" placeholder="Ekri oswa kole tèks emisyon ou..." rows="6"></textarea>
+    <!-- Zòn pou mete sijè emisyon an -->
+    <input type="text" id="subjectInput" placeholder="Tit oswa tèm emisyon an..." />
 
-    <div class="controls">
-      <label for="rate">Vitès: </label>
-      <input type="range" id="rate" min="0.5" max="2" step="0.25" value="1" />
-    </div>
+    <!-- Zòn pou tèks emisyon an -->
+    <textarea id="textInput" placeholder="Ekri oswa kole tèks emisyon ou..." rows="6"></textarea>
 
-    <div class="buttons">
-      <button onclick="playText()">🔊 Tande</button>
-      <button onclick="toggleLoop()">🔁 Repete otomatik</button>
-    </div>
-  </div>
+    <!-- Kontwòl vitès -->
+    <div class="controls">
+      <label for="rate">Vitès: </label>
+      <input type="range" id="rate" min="0.5" max="2" step="0.25" value="1" />
+    </div>
 
-  <script src="script.js"></script>
+    <!-- Bouton aksyon -->
+    <div class="buttons">
+      <button onclick="playText()">🔊 Tande</button>
+      <button onclick="toggleLoop()">🔁 Repete otomatik</button>
+      <button onclick="stopSpeech()">⏹ Sispann</button>
+    </div>
+
+    <!-- Rekòde vwa (opsyonèl) -->
+    <div class="record-section">
+      <p><em>Vle itilize vwa pa w kòm animatè? (opsyonèl)</em></p>
+      <button onclick="startRecording()">🎙️ Rekòde Vwa</button>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="script.js"></script>
 </body>
+                            </html>
+                            
