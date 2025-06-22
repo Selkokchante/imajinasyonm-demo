@@ -1,6 +1,7 @@
+/* Background & Layout */
 body {
-  font-family: sans-serif;
-  background-color: #f9f9f9;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #e6f0ff, #ffffff);
   color: #333;
   display: flex;
   justify-content: center;
@@ -9,34 +10,72 @@ body {
   margin: 0;
 }
 
+/* Container */
 .container {
   text-align: center;
-  padding: 20px;
-  max-width: 500px;
+  padding: 30px;
+  max-width: 600px;
   background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 18px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  width: 90%;
 }
 
+/* Titre */
+h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #2e89ff;
+}
+
+/* Tèks Emisyon */
 textarea {
   width: 100%;
-  height: 150px;
+  height: 160px;
   margin-top: 15px;
-  padding: 10px;
+  padding: 12px;
   font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  resize: none;
 }
 
+/* Bouton Jwe */
 button {
-  margin-top: 10px;
-  padding: 10px 20px;
+  margin-top: 15px;
+  padding: 12px 25px;
   font-size: 16px;
   background-color: #2e89ff;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 button:hover {
-  background-color: #1c6ed6;
+  background-color: #1a6dd9;
+}
+
+/* Bouton & Kontwòl Vwa */
+label {
+  display: block;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+input[type="range"] {
+  width: 100%;
+  margin-top: 5px;
+}
+
+#speedValue {
+  font-weight: bold;
+  color: #2e89ff;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.2);
+  margin-right: 8px;
   }
+  
